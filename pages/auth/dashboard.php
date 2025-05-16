@@ -18,6 +18,15 @@ if ($result && $result->num_rows > 0) {
     }
 }
 
+$recentPostSql = "
+    SELECT p.title, c.name AS category, u.name AS author, p.created_at AS date
+    FROM posts p
+    JOIN categories c ON p.category_id = c.id
+    JOIN users u ON p.user_id = u.id
+    WHERE p.status = 'published'
+";
+
+$recentPostResutl = $conn->query($recentPostSql);
 ?>
 
 <div class="dashboard-container">
@@ -65,7 +74,7 @@ if ($result && $result->num_rows > 0) {
             <div class="content-card">
                 <div class="content-header">
                     <h5 class="content-title">Recent Articles</h5>
-                    <a href="#news" class="btn btn-sm btn-outline-dark" data-tab="news-tab">View All</a>
+                    <a href="show-news" class="btn btn-sm btn-outline-dark" data-tab="news-tab">View All</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
@@ -75,56 +84,28 @@ if ($result && $result->num_rows > 0) {
                                 <th>Category</th>
                                 <th>Author</th>
                                 <th>Date</th>
-                                <th>Status</th>
-                                <th>Views</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><a href="article.html" class="article-title">The Future of Artificial Intelligence
-                                        in Everyday Life</a></td>
-                                <td>Technology</td>
-                                <td>Sarah Johnson</td>
-                                <td>May 5, 2025</td>
-                                <td><span class="status-badge status-published">Published</span></td>
-                                <td>1,245</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="article-title">Global Markets Respond to New Economic
-                                        Policies</a></td>
-                                <td>Business</td>
-                                <td>Robert Chen</td>
-                                <td>May 5, 2025</td>
-                                <td><span class="status-badge status-published">Published</span></td>
-                                <td>982</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="article-title">Researchers Discover New Species in Amazon
-                                        Rainforest</a></td>
-                                <td>Science</td>
-                                <td>Maria Garcia</td>
-                                <td>May 4, 2025</td>
-                                <td><span class="status-badge status-published">Published</span></td>
-                                <td>756</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="article-title">The Impact of Climate Change on Global
-                                        Agriculture</a></td>
-                                <td>Environment</td>
-                                <td>James Wilson</td>
-                                <td>May 3, 2025</td>
-                                <td><span class="status-badge status-draft">Draft</span></td>
-                                <td>0</td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="article-title">New Study Reveals Benefits of Intermittent
-                                        Fasting</a></td>
-                                <td>Health</td>
-                                <td>Emily Parker</td>
-                                <td>May 2, 2025</td>
-                                <td><span class="status-badge status-review">Under Review</span></td>
-                                <td>0</td>
-                            </tr>
+
+                            <?php
+                            if ($recentPostResutl->num_rows > 0) { ?>
+                                <?php while ($row = $recentPostResutl->fetch_assoc()): ?>
+                                    <tr>
+                                        <td><?= $row['title']; ?></td>
+                                        <td><?= $row['category']; ?></td>
+                                        <td><?= $row['author']; ?></td>
+                                        <td><?= date('M d Y', strtotime($row["date"])) ?></td>
+                                    </tr>
+                                <?php endwhile;
+                            } else { ?>
+                                <tr>
+                                    <td colspan="4">
+                                        <p>No Posts to retrieve</p>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+
                         </tbody>
                     </table>
                 </div>

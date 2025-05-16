@@ -17,6 +17,12 @@ function baseURL()
     $base_url .= $_SERVER['HTTP_HOST'];
     return $base_url . '/az-news';
 }
+function limit_words($text, $limit)
+{
+    $words = explode(' ', $text);
+    return implode(' ', array_slice($words, 0, $limit)) . (count($words) > $limit ? '...' : '');
+}
+
 function defaultImg()
 {
     return 'https://g-btuwypcnlte.vusercontent.net';

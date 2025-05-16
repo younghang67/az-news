@@ -39,7 +39,7 @@ $resultNews = $resultNews->fetch_assoc();
             <h4 class="dashboard-title">News</h4>
         </div>
         <div class="content-header">
-            <h5 class="content-title">Create Articles</h5>
+            <h5 class="content-title">Edit Articles</h5>
             <a href="show-news" class="btn btn-sm btn-dark">
                 Show All Article
             </a>

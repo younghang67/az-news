@@ -1,9 +1,9 @@
 <div class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <a href="index.html" class="sidebar-brand">MINIMAL NEWS</a>
+        <a href="index.html" class="sidebar-brand">AZ NEWS</a>
     </div>
     <div class="sidebar-menu">
-        <a href="dashboard" class="menu-item active" data-tab="dashboard-tab">
+        <a href="dashboard" class="menu-item" data-tab="dashboard-tab">
             <i class="bi bi-speedometer2"></i>
             <span>Dashboard</span>
         </a>

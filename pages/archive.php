@@ -100,40 +100,7 @@ if (isset($_GET['category_id'])) {
         </div>
     </div>
 </header>
-<?php if (empty($categoryId)): ?>
-    <section class="filter-section">
-        <div class="container">
-            <form method="POST">
-                <div class="row g-2">
-                    <div class="col-md-2">
-                        <select class="form-select" name="category">
-                            <option value="" selected>All Categories</option>
-                            <?php foreach ($categoryOptions as $category): ?>
-                                <option value="<?= htmlspecialchars($category['id']) ?>">
-                                    <?= htmlspecialchars($category['name']) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
 
-                    <div class="col-md-2">
-                        <select class="form-select" name="sort_by">
-                            <option value="" selected>Sort By</option>
-                            <option value="DESC">Newest First</option>
-                            <option value="ASC">Oldest First</option>
-                        </select>
-                    </div>
-                    <div class="col-md-6">
-                        <input type="text" name="search" class="form-control" placeholder="Search articles...">
-                    </div>
-                    <div class="col-md-2">
-                        <button type="submit" class="btn bg-dark text-white btn-outline-dark w-100">Search</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
-<?php endif; ?>
 
 <section class="mt-4 news-list-view list-view">
     <div class="container">
@@ -148,7 +115,7 @@ if (isset($_GET['category_id'])) {
                             <span class="article-category"><?= $post['category_name']; ?></span>
                         </div>
                         <h3 class="news-title"><?= $post['title']; ?></h3>
-                        <p class="news-excerpt"><?= $post['content']; ?></p>
+                        <p class="news-excerpt"><?= limit_words($post['content'], 30); ?></p>
                         <a href="<?= baseURL() ?>/post?post_id=<?= $post['id']; ?>"
                             class="text-dark fw-bold text-decoration-none">Read more →</a>
                     </div>

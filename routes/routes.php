@@ -165,6 +165,10 @@ switch ($path) {
     case '/migrate-fresh':
         require ROOT . '/database/migrate-fresh.php';
         break;
+
+    case '/seeding':
+        require ROOT . '/database/seeding.php';
+        break;
     //----------------------------------------------------------------------------------- filter
     case '/news-filter':
         require ROOT . '/validation/news-filter.php';
@@ -172,6 +176,6 @@ switch ($path) {
 
     default:
         http_response_code(404);
-        echo "404 Not Found";
+        require ROOT . '/404.php';
         break;
 }

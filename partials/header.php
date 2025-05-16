@@ -13,7 +13,7 @@ function active($pageName)
 
 require_once ROOT . ('/link/connect.php');
 
-$sql = " SELECT * FROM categories WHERE id != 1";
+$sql = " SELECT * FROM categories WHERE id != 1 LIMIT 6";
 $result = $conn->query($sql);
 
 $categories = [];
@@ -53,9 +53,14 @@ if ($result->num_rows > 0) {
                     <?php foreach ($categories as $category): ?>
                         <li class="nav-item">
                             <a class="nav-link"
-                                href="<?= baseURL() ?>/news/category?category_id=<?= $category['id']; ?>"><?= htmlspecialchars($category['name']); ?></a>
+                                href="<?= baseURL() ?>/news/category?category_id=<?= $category['id']; ?>"><?= $category['name'] ?></a>
                         </li>
                     <?php endforeach; ?>
+                    <?php
+                    if (isLoggedIn()) { ?>
+                        <li><a href="dashboard" class="btn btn-primary">admin</a></li>
+                    <?php }
+                    ?>
                 </ul>
             </div>
         </div>

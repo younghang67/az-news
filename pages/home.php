@@ -31,6 +31,7 @@ if (!isset($_GET['category_id'])) {
     FROM posts
     JOIN categories ON posts.category_id = categories.id WHERE posts.status = '$currentPostStatus'";
     $allPostsResult = $conn->query($allPostsQuery);
+    
     if ($allPostsResult && $allPostsResult->num_rows > 0) {
         while ($postRow = $allPostsResult->fetch_assoc()) {
             $posts[] = $postRow;
@@ -137,7 +138,7 @@ if (!isset($_GET['category_id'])) {
                             <span class="article-category"><?= $post['category_name']; ?></span>
                         </div>
                         <h3 class="news-title"><?= $post['title']; ?></h3>
-                        <p class="news-excerpt"><?= $post['content']; ?></p>
+                        <p class="news-excerpt"><?= limit_words($post['content'], 30); ?></p>
                         <a href="<?= baseURL() ?>/post?post_id=<?= $post['id']; ?>"
                             class="text-dark fw-bold text-decoration-none">Read more →</a>
                     </div>

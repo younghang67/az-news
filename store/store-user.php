@@ -13,19 +13,19 @@ if (
 
     if ($password !== $confirmPassword) {
         $_SESSION['message'] = ['type' => 'danger', 'text' => 'Passwords do not match.'];
-        header("Location: register");
+        header("Location: sign-up");
         $conn->close();
         exit();
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $_SESSION['message'] = ['type' => 'danger', 'text' => 'Invalid email format.'];
-        header("Location: register");
+        header("Location: sign-up");
         $conn->close();
         exit();
     }
     if (strlen($password) < 8) {
         $_SESSION['message'] = ['type' => 'danger', 'text' => 'Password must be at least 8 characters long.'];
-        header("Location: register");
+        header("Location: sign-up");
         $conn->close();
         exit();
     }
@@ -39,7 +39,7 @@ if (
     if ($stmt->num_rows > 0) {
         $_SESSION['message'] = ['type' => 'danger', 'text' => 'Email already exists.'];
         $stmt->close();
-        header("Location: register");
+        header("Location: sign-up");
         $conn->close();
         exit();
     }
@@ -60,13 +60,13 @@ if (
     } else {
         $_SESSION['message'] = ['type' => 'danger', 'text' => 'Registration failed.'];
         $stmt->close();
-        header("Location: register");
+        header("Location: sign-up");
         $conn->close();
         exit();
     }
 } else {
     $_SESSION['message'] = ['type' => 'danger', 'text' => 'Please fill in all fields.'];
-    header("Location: register");
+    header("Location: sign-up");
     $conn->close();
     exit();
 }

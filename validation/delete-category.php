@@ -18,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['category_id'])) {
             $stmt->bind_param("i", $categoryId);
 
             if ($stmt->execute()) {
-
                 $checkStmt = $conn->query("SELECT COUNT(*) as count FROM categories");
                 $row = $checkStmt->fetch_assoc();
                 if ($row['count'] == 0) {

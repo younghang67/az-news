@@ -28,26 +28,31 @@ $result = $conn->query($sql);
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <div class="col-md-6">
                                 <div class="category-card">
-                                    <div>
-                                        <h6 class="category-name"><?= htmlspecialchars($row["name"]) ?></h6>
-                                        <p class="category-count">42 articles</p>
-                                    </div>
-                                    <?php if ($row["id"] != 1): ?>
-                                        <div>
-                                            <form action="edit-category" method="GET" class="d-inline-block">
-                                                <input type="hidden" value="<?= htmlspecialchars($row["id"]) ?>" name="category_id">
-                                                <button data-bs-toggle="modal" data-bs-target="#addCategoryModal"
-                                                    class="me-1 no-style" type="submit"><i
-                                                        class="bi bi-pencil-square action-icon edit"></i></button>
-                                            </form>
+                                    <div class="w-100">
+                                        <div class="w-100 d-flex mb-3">
+                                            <h6 class="category-name flex-grow-1"><?= htmlspecialchars($row["name"]) ?></h6>
+                                            <?php if ($row["id"] != 1): ?>
+                                                <div>
+                                                    <form action="edit-category" method="GET" class="d-inline-block">
+                                                        <input type="hidden" value="<?= htmlspecialchars($row["id"]) ?>"
+                                                            name="category_id">
+                                                        <button data-bs-toggle="modal" data-bs-target="#addCategoryModal"
+                                                            class="me-1 no-style" type="submit"><i
+                                                                class="bi bi-pencil-square action-icon edit"></i></button>
+                                                    </form>
 
-                                            <form action="delete-category" method="POST" class="d-inline-block">
-                                                <input type="hidden" value="<?= htmlspecialchars($row["id"]) ?>" name="category_id">
-                                                <button type="submit" class="me-1 no-style"><i
-                                                        class="bi bi-trash action-icon delete"></i></button>
-                                            </form>
+                                                    <form action="delete-category" method="POST" class="d-inline-block">
+                                                        <input type="hidden" value="<?= htmlspecialchars($row["id"]) ?>"
+                                                            name="category_id">
+                                                        <button type="submit" class="me-1 no-style"><i
+                                                                class="bi bi-trash action-icon delete"></i></button>
+                                                    </form>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
-                                    <?php endif; ?>
+                                        <p><?= limit_words($row['description'], 15) ?></p>
+                                    </div>
+
                                 </div>
                             </div>
                         <?php endwhile; ?>

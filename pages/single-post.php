@@ -2,7 +2,6 @@
 
 require_once ROOT . ('/link/connect.php');
 
-
 $postId = null;
 $postDetail = null;
 
@@ -28,8 +27,9 @@ if (isset($_GET['post_id'])) {
 }
 if (isset($_GET['post_id'])) {
     $pageTitle = $postDetail['title'];
+} else {
+    $pageTitle = "News";
 }
-$pageTitle = "News";
 
 require_once ROOT . ('/partials/header.php');
 

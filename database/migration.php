@@ -53,6 +53,16 @@ if ($conn->query($sql) === TRUE) {
     die("Error creating users table: " . $conn->error);
 }
 
+$password = 'admin';
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+$sql = "INSERT IGNORE INTO users (id, name, email, password) VALUES (1, 'admin' , 'admin@fake.com', '$hashedPassword' )";
+if ($conn->query($sql) === TRUE) {
+    echo "user added successfully<br>";
+} else {
+    die("Error creating user : " . $conn->error);
+}
+
 
 $sql = "CREATE TABLE IF NOT EXISTS posts (
     id INT AUTO_INCREMENT PRIMARY KEY,
